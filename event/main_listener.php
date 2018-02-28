@@ -75,9 +75,17 @@ class main_listener implements EventSubscriberInterface
 			{
 				continue;
 			}
+			
+			// We add [youtube] bbcode
+			if ($siteId === 'youtube') {
+				$configurator->BBCodes->add('youtube', ['contentAttributes' => ['url']]);
+			}
 
 			$configurator->MediaEmbed->add($siteId);
 		}
+		
+		// We disable URL autoparsing, leaving [embed] and [youtube] bbcodes
+		unset($configurator->MediaEmbed);
 	}
 
 	/**
